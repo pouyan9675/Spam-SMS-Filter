@@ -1,0 +1,6 @@
+venv/
+.vscode/
+.ipynb_checkpoints/
+hazm/
+.idea/
+dataset/

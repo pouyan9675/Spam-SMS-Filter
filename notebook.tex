@@ -1,0 +1,580 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Documentation}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{1.Review the dataset}\label{review-the-dataset}
+
+    We review and prepare last phase dataset to processing and learning so
+we import pandas to convert Dataset.csv file to dataframe. They are in
+csv format and separated by ',' delimeter. we will use read\_csv
+function to do that
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dataset.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    Unnamed: 0                                            Message   Tag
+        0           0  سلام\textbackslash{}n عیدی شما آماده است. عدد 1 را به شماره 3{\ldots}  Spam
+        1           1  رفاه گیلان\textbackslash{}nچای تشریفات47\%\textbackslash{}nروغن لادن15\%\textbackslash{}nاسپا{\ldots}  Spam
+        2           2  درست و اصولی لاغر  شوید\textbackslash{}n*غیرحضوری*\textbackslash{}n\textbackslash{}nکلیک کن{\ldots}  Spam
+        3           3  خبرهای هیجان انگیز و جنجالی برای علاقمندان به {\ldots}  Spam
+        4           4  هدیه ویژه نوروزی برای تمام مشترکین سرویس تلگرا{\ldots}  Spam
+\end{Verbatim}
+            
+    It has three columns that we need second and third column
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 416 entries, 0 to 415
+Data columns (total 3 columns):
+Unnamed: 0    416 non-null int64
+Message       416 non-null object
+Tag           416 non-null object
+dtypes: int64(1), object(2)
+memory usage: 9.8+ KB
+
+    \end{Verbatim}
+
+    Here we got 416 samples that they're tagged with Spam and Non Spam
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Spam        236
+        Non Spam    180
+        Name: Tag, dtype: int64
+\end{Verbatim}
+            
+    Spam messages are more than non spams so it is expected to detect spam
+messages better than non spams. We will save messages daa series to use
+it later.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{raw\PYZus{}messages} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Message}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    Because of using scikit learn and ensuring models compatibility we need
+to encode class labels we will use sklearn.preprocessing.LabelEncoder to
+encode all tags.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{le} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{labels} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    We need to prepare our stop words list for preprcessing step that is
+next step. Persian stop words list is sotred in file named
+stop-words.txt and the words are listed line by line. Using pandas we
+will make a dataframe
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stop\PYZhy{}words.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+        \PY{n}{stop\PYZus{}words}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}          0
+        0   اتفاقا
+        1  احتراما
+        2  احتمالا
+        3      اري
+        4      آري
+\end{Verbatim}
+            
+    \subsection{2.Text Preprocessing}\label{text-preprocessing}
+
+We are going to words as features (n-gram language model) and counting
+their occurance. If we perform this strategy we got lot's of features
+that many of them is not useful. The classifier would takes to long time
+to train and likely overfit. so we will do following preprocessing
+steps:
+
+    \subsubsection{Normalization}\label{normalization}
+
+Lots of spam SMS contains phone numbers, urls or even email addresses so
+we will use Regex to convert all of them to a key word.
+
+\begin{verbatim}
+<li>Replace <b>phone numbers</b> with <code>'شماره_تلفن'</code></li>
+<li>Replaec <b>URLs</b> with <code>آدرس _ لینک</code></li>
+<li>Replaec <b>email</b> with <code>آدرس _ایمیل</code></li>
+\end{verbatim}
+
+ But to use regex first we should transfer all persian numbers to
+english that we use a function named numbers\_to\_english()
+
+    ```python text = numbers\_to\_english(text) text = re.sub(email\_regex,
+'آدرس\_ایمیل', text) text = re.sub(phone\_regex, 'شماره\_تلفن', text)
+text = re.sub(url\_regex, 'آدرس\_لینک', text) text =
+re.sub(number\_regex, 'عدد\_رقم', text)
+
+    We use hazm to normalize text and special characters
+
+    ```python normalizer = Normalizer() text = normalizer.normalize(text)
+
+    \subsubsection{Stemming}\label{stemming}
+
+For persian stemming there is Stemmer class in Hazm that can stem all
+words Stemmer will find words stem for example it will replace 'کتاب‌ها'
+with 'کتاب'
+
+    ```python stemmer = Stemmer() for index, term in enumerate(tokens):
+tokens{[}index{]} = stemmer.stem(term)
+
+    \subsubsection{Stop words}\label{stop-words}
+
+Some words in Persian language while necessary, don't contribute much
+meaning of phrase. These words, such as 'از', 'احتراما' are called stop
+words. They can effects on results and should be filtered out.
+
+text = ' '.join(term for term in tokens if term not in
+stop\_words.values)
+
+    So the final preprocessing step will have following code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{from} \PY{n+nn}{hazm} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{email\PYZus{}regex} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZca{}[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9.!\PYZsh{}\PYZdl{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZam{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{*+/=?\PYZca{}\PYZus{}`}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{|\PYZcb{}\PYZti{}\PYZhy{}]+@[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9](?:[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9\PYZhy{}]}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{0,61\PYZcb{}[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9])?(?:}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{.[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9](?:[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9\PYZhy{}]}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{0,61\PYZcb{}[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9])?)*\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{phone\PYZus{}regex} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{((}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{+98|0)?9}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d}\PY{l+s+si}{\PYZob{}9\PYZcb{}}\PY{l+s+s2}{)|(0}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d}\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d}\PY{l+s+si}{\PYZob{}8\PYZcb{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d}\PY{l+s+si}{\PYZob{}8\PYZcb{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{number\PYZus{}regex} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[1\PYZhy{}9]}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d+}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{url\PYZus{}regex} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(@\PYZca{}(https?|ftp)://[\PYZca{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{s/\PYZdl{}.?\PYZsh{}].[\PYZca{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{s]*\PYZdl{}@iS)|(t.me/[a\PYZhy{}z|0\PYZhy{}9]}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{4,\PYZcb{})}\PY{l+s+s2}{\PYZdq{}}\PYZbs{}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|((https?://)?(w}\PY{l+s+si}{\PYZob{}3\PYZcb{}}\PY{l+s+s2}{.)?[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9]+.[a\PYZhy{}zA\PYZhy{}Z]}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{2,\PYZcb{}(/[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9]*)*)}\PY{l+s+s2}{\PYZdq{}}
+         
+         
+         \PY{k}{def} \PY{n+nf}{numbers\PYZus{}to\PYZus{}english}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۰}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۱}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۲}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۳}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۵}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۶}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۷}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۸}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{۹}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{9}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text}
+         
+         
+         \PY{k}{def} \PY{n+nf}{preprocessing\PYZus{}text}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{text} \PY{o}{=} \PY{n}{numbers\PYZus{}to\PYZus{}english}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{email\PYZus{}regex}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{آدرس\PYZus{}ایمیل}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{phone\PYZus{}regex}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{شماره\PYZus{}تلفن}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{url\PYZus{}regex}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{آدرس\PYZus{}لینک}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{number\PYZus{}regex}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{عدد\PYZus{}رقم}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+             \PY{n}{normalizer} \PY{o}{=} \PY{n}{Normalizer}\PY{p}{(}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{n}{normalizer}\PY{o}{.}\PY{n}{normalize}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+             \PY{n}{tokens} \PY{o}{=} \PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{text}\PY{p}{)}    
+             \PY{n}{stemmer} \PY{o}{=} \PY{n}{Stemmer}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{term} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{tokens}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tokens}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{n}{stemmer}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{term}\PY{p}{)}
+             \PY{n}{text} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{term} \PY{k}{for} \PY{n}{term} \PY{o+ow}{in} \PY{n}{tokens} \PY{k}{if} \PY{n}{term} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{stop\PYZus{}words}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text}
+\end{Verbatim}
+
+
+    Now we preprocess all messages and save them inside of an array named
+documents to start learning
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{documents} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{content} \PY{o+ow}{in} \PY{n}{raw\PYZus{}messages}\PY{p}{:}
+             \PY{n}{content} \PY{o}{=} \PY{n}{preprocessing\PYZus{}text}\PY{p}{(}\PY{n}{content}\PY{p}{)}
+             \PY{n}{documents}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{content}\PY{p}{)}
+         \PY{n}{documents}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} ['سلا عید آماده اس . عدد ۱ شماره عدد\_رق پیامک کنید عضو اپلیکیشن بازیانا دسترس نامحدود بازی پرتال عدد\_رق شارژ عید بگیرید . "',
+          'رفاه گیل چا تشریفاتعدد\_رقم٪ روغن لادنعدد\_رقم٪ اسپاگت ماناعدد\_رقم٪ ۱/عدد\_رق لغوعدد۱',
+          'درس اصول لاغر شوید *غیرحضوری* کلیک کنید : آدرس\_لینک',
+          'خبر هیج انگیز جنجال برا علاقمند فیل سریال ، هنرمند خبر حاشیه . عضو اپلیکیشن مواستار قرعه کش کمپین بهار عدد\_رق جوایز پژو عدد\_رق ، آیفون x سامسونگ s۹ شرک کن جایزه ببر ارسال عدد : عدد\_رق دانلود اپلیکیشن : آدرس\_لینک',
+          'هدیه ویژه نوروز برا تما مشترکین سرویس تلگراف . مناسب نوروز عدد\_رق ، کتابچه ارز عدد\_رق تمام کاربران که ارسال ۱ عدد\_رق عضو سرویس کتابخانه الکترونیک تلگراف تعلق خواهد\_گرف .']
+\end{Verbatim}
+            
+    \subsection{3.Features}\label{features}
+
+Now we've prepared the dataset for meaningful terms we're ready to
+construct features. So we will start will with tokenizing terms.
+
+    \subsubsection{Tokenization}\label{tokenization}
+
+We will tokenize individual terms and generating a bag of words model.
+But this model have a weakness that it fails to capture innate structure
+of human language and only represent occurence of terms. Alternatively
+we can use n-gram model to preserve words order and acn capture more
+information than bag of words model.
+
+    \subsubsection{Implementing the tf-idf
+statistic}\label{implementing-the-tf-idf-statistic}
+
+The next step is assign each n-gram a feature and then compute the
+n=gram's frequency using some statistic. One good way to do is tf-idf.
+term frequency (tf) counts each n-gram occurance in a document to weight
+it's importance. But it won't work much good in some cases because of
+weighting common words that are in every document much more. Therefore
+to solve it we'll downweight term frequency with inverse document
+frequency (idf), which is calculated by logarithmically scaling the
+inverse of the fraction of training examples that contain a given term.
+By combining these two statistic formulas the tf-idf statistics:
+\[ tf-idf(t,i) = tf(t,i)\times idf(t) \]
+\[ =tf(t,i) \times \log \left( \frac{M}{m_t} \right) \]
+
+    where \(tf(t,i)\) is the term frequency for term \(t\) in the \(i\)th
+training example, \(M\) is the total number of training examples, and
+\(m_t\) is the number of training examples that contain the term \(t\).
+Scikit Learn has a class called TfidfVectorizer that perform n-gram
+tokenization and also computes the tf-idf statistic. According to it's
+documentation it will do two things:
+
+\begin{verbatim}
+<li>Computing tf-idf and avoiding devision by zero using <b>smoothing</b> (laplace) </li>
+<li>L2 normalization using <b>Euclidean</b> norm </li>
+\end{verbatim}
+
+ Finally we're ready to transform a corpus of text data into a matrix of
+numbers with one row per training sample and one column per \(n\)-gram
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{vectorizer} \PY{o}{=} \PY{n}{TfidfVectorizer}\PY{p}{(}\PY{n}{ngram\PYZus{}range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{n\PYZus{}grams} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{documents}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's take a look at the dimensions of the n\_grams matrix.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{n\PYZus{}grams}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} (416, 3878)
+\end{Verbatim}
+            
+    It's looks like the tokenizer extract 3878 unigrams and bigrams.Since
+each training set use only a few of these unigram and bigrams this
+matrix consists of zeros and is called a sparse matrix. But
+TfidfVectorizer handle it using Scipy.
+
+    \subsection{\texorpdfstring{4.Training and evaluating model
+}{4.Training and evaluating model  }}\label{training-and-evaluating-model}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
